@@ -46,13 +46,15 @@ that is formed by the array
 //I have changed the function below ,instead of passing array , I have passed a pointer to the array
 
 Node *BSTFromSortedArray(int* input, int len){
+	
 	int mid=len/2;
 	Node* head=init(input[mid]);
+	if(len<=1)	return head;
 	head->left=BSTFromSortedArray(input,mid);
-	//head->right=BSTFromSortedArray(input+mid+1,len-mid-1);
+	head->right=BSTFromSortedArray(input+mid+1,len-mid-1);
 	
-	if(len==2)	return head;
-	//return BSTFromSortedArray
+	return head;
+	
 }
 
 /*
@@ -94,7 +96,24 @@ This function takes as input a node pointer and a val and searches for a node wh
 It returns true if the value is found, false otherwise.
 */
 bool search(Node *curr,int val){
+	Node *iter = curr;
+	while(iter != NULL){
+		if(iter->val == val){
+			//iter=iter->left;
+			return true;
+		}
+		else if(iter->val > val){
+			cout<<iter->val<<endl;
+			iter=iter->left;
+		}
+		else if(iter->val < val){
+			cout<<iter->val<<endl;
+			iter=iter->right;
+		}
+		
 
+	}	
+	return false;
 }
 
 /*int main(){
@@ -118,6 +137,13 @@ bool search(Node *curr,int val){
   return 0;
 }
 */
+/*void print_bst(Node * head){
+	Node* iter = head;
+	while(iter!=NULL){
+		cout<<iter->val;
+		iter=iter->left;
+	}
+}*/
 int main(){
 	int arr[N];
 	int t;
@@ -126,4 +152,8 @@ int main(){
 		cin>>arr[i];
 	}
 	Node* root=BSTFromSortedArray(arr,t);
+	if(search(root,7)==true){
+		cout<<"Yes"<<endl;
+	}
+	//print_bst(root);
 }
