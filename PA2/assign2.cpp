@@ -72,23 +72,30 @@ void deleteNode(Node *curr){
 This function returns true if the current node satisfies the nearly balanced condition and false otherwise
 */
 bool checkNearBalance(Node *curr){
+	if(curr->left->size < BALANCE_RATIO*curr->size && curr->right->size < BALANCE_RATIO*curr->size ){
+		return true;
+	}
+	return false;
 }
 
 /*
 This function returns true if the current node satisfies the perfectly balanced condition and false otherwise
 */
 bool checkPerfectBalance(Node *curr){
+	if( abs( curr->left->size - curr->right->size ) <= 1 ){
+		return true;
+	}
+	return false;
 }
 
 /*
 This function takes as input a pointer to a node and inserts a node in the subtree of the node depending on the value.
 out[] array is used as a helper array which will be used when the BST does not satisfy the balanced condition.
 
--when the insert returns then the tree must satisfy the balanced condition
+-when the insert returns then the tree must satisfy the balanced condition2
 */
 void insert(Node *curr,int val,int out[]){
-	Node *head= curr; 				//curr is  the head of the tree
-	if(curr->left){}	  
+		  
 }
 
 /*
@@ -116,34 +123,34 @@ bool search(Node *curr,int val){
 	return false;
 }
 
-/*int main(){
-  Node *root = NULL;
-  int out[N];
-  int queries; scanf("%d",&queries);		//no of queries
-  while(queries--){
-    int c,val; scanf("%d%d",&c,&val);
-    if(c==1){				// query type 1: insertion
-      //insert
-      if(root){			//if root is not NULL
-        insert(root,val,out);
-      }else{			// If root is NULL
-        root = init(val);
-      }
-    }else{
-      //search query
-      if(search(root,val)) printf("Yes\n"); else printf("No\n");
-    }
-  }
-  return 0;
-}
-*/
-/*void print_bst(Node * head){
+// int main(){
+//   Node *root = NULL;
+//   int out[N];
+//   int queries; scanf("%d",&queries);		//no of queries
+//   while(queries--){
+//     int c,val; scanf("%d%d",&c,&val);
+//     if(c==1){				// query type 1: insertion
+//       //insert
+//       if(root){			//if root is not NULL
+//         insert(root,val,out);
+//       }else{			// If root is NULL
+//         root = init(val);
+//       }
+//     }else{
+//       //search query
+//       if(search(root,val)) printf("Yes\n"); else printf("No\n");
+//     }
+//   }
+//   return 0;
+// }
+
+void print_bst(Node * head){
 	Node* iter = head;
 	while(iter!=NULL){
 		cout<<iter->val;
 		iter=iter->left;
 	}
-}*/
+}
 int main(){
 	int arr[N];
 	int t;
@@ -152,7 +159,7 @@ int main(){
 		cin>>arr[i];
 	}
 	Node* root=BSTFromSortedArray(arr,t);
-	if(search(root,7)==true){
+	if(search(root,3)==true){
 		cout<<"Yes"<<endl;
 	}
 	//print_bst(root);
