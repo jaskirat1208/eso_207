@@ -40,11 +40,19 @@ int SortedArrayFromBST(Node *curr,int output[],int fst){
 }
 
 /*
-This function creates a BST from an array. It takes as parameters input array and the length of array. It returns the root of the BST
+This function creates a BST from an array. It takes as parameter2. It returns the root of the BST
 that is formed by the array
 */
-Node *BSTFromSortedArray(int input[], int len){
+//I have changed the function below ,instead of passing array , I have passed a pointer to the array
 
+Node *BSTFromSortedArray(int* input, int len){
+	int mid=len/2;
+	Node* head=init(input[mid]);
+	head->left=BSTFromSortedArray(input,mid);
+	//head->right=BSTFromSortedArray(input+mid+1,len-mid-1);
+	
+	if(len==2)	return head;
+	//return BSTFromSortedArray
 }
 
 /*
@@ -55,6 +63,7 @@ void deleteNode(Node *curr){
   deleteNode(curr->left); 
   deleteNode(curr->right);
   delete curr;
+
 }
 
 /*
@@ -76,7 +85,8 @@ out[] array is used as a helper array which will be used when the BST does not s
 -when the insert returns then the tree must satisfy the balanced condition
 */
 void insert(Node *curr,int val,int out[]){
-  
+	Node *head= curr; 				//curr is  the head of the tree
+	if(curr->left){}	  
 }
 
 /*
@@ -87,17 +97,17 @@ bool search(Node *curr,int val){
 
 }
 
-int main(){
+/*int main(){
   Node *root = NULL;
   int out[N];
-  int queries; scanf("%d",&queries);
+  int queries; scanf("%d",&queries);		//no of queries
   while(queries--){
     int c,val; scanf("%d%d",&c,&val);
-    if(c==1){
+    if(c==1){				// query type 1: insertion
       //insert
-      if(root){
+      if(root){			//if root is not NULL
         insert(root,val,out);
-      }else{
+      }else{			// If root is NULL
         root = init(val);
       }
     }else{
@@ -106,4 +116,14 @@ int main(){
     }
   }
   return 0;
+}
+*/
+int main(){
+	int arr[N];
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++){
+		cin>>arr[i];
+	}
+	Node* root=BSTFromSortedArray(arr,t);
 }
