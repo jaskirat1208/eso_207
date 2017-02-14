@@ -36,8 +36,17 @@ increasing order.
 This function must return the number of array positions it has filled. i.e. if initial value of parameter fst = p, then after returning from the function the final value must increase by the size of subtree i.e p+curr->size.
 */
 int SortedArrayFromBST(Node *curr,int output[],int fst){
-
-}
+	if(curr==NULL){
+		return 0;
+	} 
+	int j=0;
+	fst+=SortedArrayFromBST(curr->left,output,j);
+	output[fst]=curr->val;
+	j++;
+	cout<<fst<<" ";
+	fst+=SortedArrayFromBST(curr->right,output,j);
+	return fst;
+} 
 
 /*
 This function creates a BST from an array. It takes as parameter2. It returns the root of the BST
@@ -49,10 +58,13 @@ Node *BSTFromSortedArray(int* input, int len){
 	
 	int mid=len/2;
 	Node* head=init(input[mid]);
-	if(len<=1)	return head;
+	if(len<1){
+		head->size=0;	
+		return head;
+	}
 	head->left=BSTFromSortedArray(input,mid);
 	head->right=BSTFromSortedArray(input+mid+1,len-mid-1);
-	
+	head->size=head->left->size + head->right->size+1;
 	return head;
 	
 }
@@ -95,7 +107,12 @@ out[] array is used as a helper array which will be used when the BST does not s
 -when the insert returns then the tree must satisfy the balanced condition2
 */
 void insert(Node *curr,int val,int out[]){
-		  
+		  if(TOBALANCE){
+		  		//Perfectly balanced condition
+		  }
+		  else{
+		  		//Nearly balanced condition
+		  }
 }
 
 /*
@@ -110,11 +127,11 @@ bool search(Node *curr,int val){
 			return true;
 		}
 		else if(iter->val > val){
-			cout<<iter->val<<endl;
+			//cout<<iter->val<<endl;
 			iter=iter->left;
 		}
 		else if(iter->val < val){
-			cout<<iter->val<<endl;
+			//cout<<iter->val<<endl;
 			iter=iter->right;
 		}
 		
@@ -147,7 +164,7 @@ bool search(Node *curr,int val){
 void print_bst(Node * head){
 	Node* iter = head;
 	while(iter!=NULL){
-		cout<<iter->val;
+		//cout<<iter->val;
 		iter=iter->left;
 	}
 }
@@ -159,6 +176,13 @@ int main(){
 		cin>>arr[i];
 	}
 	Node* root=BSTFromSortedArray(arr,t);
+
+	long long k=SortedArrayFromBST(root,arr,0);
+	/*for(int i=0;i<k;i++){
+		cout<<arr[i]<" ";
+	}*/
+	//cout<<k;
+	//cout<<root->size;
 	if(search(root,3)==true){
 		cout<<"Yes"<<endl;
 	}
