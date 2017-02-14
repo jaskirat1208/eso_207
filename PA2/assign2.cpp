@@ -36,16 +36,12 @@ increasing order.
 This function must return the number of array positions it has filled. i.e. if initial value of parameter fst = p, then after returning from the function the final value must increase by the size of subtree i.e p+curr->size.
 */
 int SortedArrayFromBST(Node *curr,int output[],int fst){
-	if(curr==NULL){
-		return 0;
-	} 
-	int j=0;
-	fst+=SortedArrayFromBST(curr->left,output,j);
+	SortedArrayFromBST(curr->left,output,fst);
 	output[fst]=curr->val;
-	j++;
-	cout<<fst<<" ";
-	fst+=SortedArrayFromBST(curr->right,output,j);
+	fst++;
+	SortedArrayFromBST(curr->right,output,fst);
 	return fst;
+	
 } 
 
 /*
