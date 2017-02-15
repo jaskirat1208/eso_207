@@ -35,17 +35,24 @@ This function fills in the array all the values in the tree whose root is the gi
 increasing order.
 This function must return the number of array positions it has filled. i.e. if initial value of parameter fst = p, then after returning from the function the final value must increase by the size of subtree i.e p+curr->size.
 */
+	//int j=0;
 int SortedArrayFromBST(Node *curr,int output[],int fst){
-	if(curr==NULL){
+	if (curr->left == NULL ){
 		return 0;
-	} 
-	int j=0;
-	fst+=SortedArrayFromBST(curr->left,output,j);
-	output[fst]=curr->val;
-	j++;
-	cout<<fst<<" ";
-	fst+=SortedArrayFromBST(curr->right,output,j);
-	return fst;
+	}
+	if(curr->right==NULL)	return 0;
+
+	int n=0;
+	n= SortedArrayFromBST(curr->left,output,fst);
+	fst+=n;
+	output[fst] =curr->val;
+	fst++;
+	n++;
+
+	n+=SortedArrayFromBST(curr->right,output,fst);
+
+	return n;
+	
 } 
 
 /*
@@ -109,6 +116,9 @@ out[] array is used as a helper array which will be used when the BST does not s
 void insert(Node *curr,int val,int out[]){
 		  if(TOBALANCE){
 		  		//Perfectly balanced condition
+		  		if(checkPerfectBalance(curr)){
+
+		  		}
 		  }
 		  else{
 		  		//Nearly balanced condition
@@ -169,19 +179,20 @@ void print_bst(Node * head){
 	}
 }
 int main(){
-	int arr[N];
+	int arr[N],b[N];
 	int t;
 	cin>>t;
 	for(int i=0;i<t;i++){
 		cin>>arr[i];
 	}
 	Node* root=BSTFromSortedArray(arr,t);
-
-	long long k=SortedArrayFromBST(root,arr,0);
-	/*for(int i=0;i<k;i++){
-		cout<<arr[i]<" ";
-	}*/
-	//cout<<k;
+	//delete root->right;
+	cout<<root->size<<" ";
+	long long k=SortedArrayFromBST(root,b,0);
+	for(int i=0;i<k;i++){
+		cout<<b[i]<<" ";
+	}
+	//cout<<k<<" ";
 	//cout<<root->size;
 	if(search(root,3)==true){
 		cout<<"Yes"<<endl;
