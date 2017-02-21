@@ -54,7 +54,8 @@ void deleteNode(Node *curr){
   if(curr==NULL) return;
   deleteNode(curr->left); 
   deleteNode(curr->right);
-  delete curr;
+  curr->left=NULL;
+  curr->right=NULL;
 }
 
 /*
