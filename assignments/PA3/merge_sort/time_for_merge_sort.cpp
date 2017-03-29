@@ -68,11 +68,11 @@ void ms(int arr[],int l,int r){
 
 int main(int argc, char const *argv[])
 {
-	int repeat=100;
+	int repeat=1000;
     std::chrono::time_point<std::chrono::system_clock> start, end;
 	while(repeat--){
 		// comparisons=0;
-		int n=100;
+		int n=10000;
 		int arr[n];
 		for(int i=0;i<n;i++){
 			int x;
@@ -80,7 +80,7 @@ int main(int argc, char const *argv[])
 			arr[i]=x;
 		}
         start = std::chrono::system_clock::now();
-		ms(arr,0,100);
+		ms(arr,0,n);
         end = std::chrono::system_clock::now();
 		std::chrono::duration<double> elapsed_seconds = end-start;
         // std::time_t end_time = std::chrono::system_clock::to_time_t(end);

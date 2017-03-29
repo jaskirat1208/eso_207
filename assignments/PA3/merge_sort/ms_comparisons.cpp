@@ -39,12 +39,14 @@ void merge(int arr[], int l, int m, int r)
     /* Copy the remaining elements */
     while (i < x)
     {
+        comparisons++;
         arr[k] = L[i];
         i++;
         k++;
     }
     while (j < y)
     {
+        comparisons++;
         arr[k] = R[j];
         j++;
         k++;
@@ -67,17 +69,17 @@ void ms(int arr[],int l,int r){
 
 int main(int argc, char const *argv[])
 {
-	int repeat=100;
+	int repeat=1000;
 	while(repeat--){
 		comparisons=0;
-		int n=100;
-		int arr[100];
+		int n=10000;
+		int arr[n];
 		for(int i=0;i<n;i++){
 			int x;
 			cin>>x;
 			arr[i]=x;
 		}
-		ms(arr,0,100);
+		ms(arr,0,n);
 		cout<<comparisons<<endl;
 	}	
 	// for(int i=0;i<100;i++)	cout<<arr[i]<<endl;
