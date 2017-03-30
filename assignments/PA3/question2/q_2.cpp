@@ -67,26 +67,26 @@ int main(int argc, char const *argv[])
 		cin>>v[i];
 	}	
 	v=op(v,n);
-	for(int i=0;i<n;i++){
-		cout<<v[i]<<endl;
-	}
+	// for(int i=0;i<n;i++){
+	// 	cout<<v[i]<<" ";
+	// }
 	// two(v,n);
 	// one(v,n);
 	// zero(v,n);
-	// long *sum_sub=(long int*)calloc(n,sizeof(long int));
-	// sum_sub[0]=v[0];
-	// for(int i=1;i<n;i++){
-	// 	sum_sub[i]=sum_sub[i-1]+v[i];
-	// }
-	// int q;
-	// cin>>q;
-	// while(q--){
-	// 	int i,j,l,r;
-	// 	cin>>i>>j>>l>>r;
-	// 	if(i!=0)
-	// 		cout<<sum_sub[j]-sum_sub[i-1];
-	// 	if(i==0)	cout<<sum_sub[j];
+	long *sum_sub=(long int*)calloc(n,sizeof(long int));
+	sum_sub[0]=v[0];
+	for(int i=1;i<n;i++){
+		sum_sub[i]=sum_sub[i-1]+v[i];
+	}
+	int q;
+	cin>>q;
+	while(q--){
+		int i,j,l,r;
+		cin>>i>>j>>l>>r;
+		if(i!=0)
+			cout<<sum_sub[j]-sum_sub[i-1]<<endl;
+		if(i==0)	cout<<sum_sub[j]<<endl;
 		
-	// }
+	}
 	return 0;
 }

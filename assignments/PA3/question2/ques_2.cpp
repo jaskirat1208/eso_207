@@ -56,13 +56,13 @@ int main(int argc, char const *argv[])
 	// int *arr=(int*)calloc(n,sizeof(int));
 	std::vector<int> v,v1,v2,v3;
 	for(int i=0;i<n;i++){
-		int x;
-		cin>>x;
-		v.push_back(x);
+		v.push_back(i+1);
 	}	
 	v=op(v);
-	for(int i=0;i<n;i++){
-		cout<<v[i]<<" ";
+	int i,j;
+	cin>>i>>j;
+	for(int l=i;l<=j;l++){
+		cout<<v[l]<<" ";
 	}
 	// v1=two(v);
 	// v2=one(v);
